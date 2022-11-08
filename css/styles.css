@@ -400,26 +400,34 @@ header a {
 
 .client-list-item {
   display: flex;
+  /* justify-content: center;
+  align-items: center;
+  border: 1px solid #afb1b8;
+  border-radius: 4px;
+  width: 170px; 
+  height: 92px; */
+}
+
+.client-list-item:hover,
+.client-list-item:focus {
+  cursor: pointer;
+  outline:1px solid var(--button-color) ;
+  border-radius: 4px;
+}
+
+.client-link {
+  fill: #afb1b8;
   justify-content: center;
   align-items: center;
   border: 1px solid #afb1b8;
   border-radius: 4px;
   width: 170px;
   height: 92px;
+  display: flex;
 }
 
-.client-list-item:hover,
-.client-list-item:focus {
-  cursor: pointer;
-  border: 1px solid var(--button-color);
-}
-
-.client-link {
-  fill: #afb1b8;
-}
-
-.client-list-item:hover .client-link,
-.client-list-item:focus .client-link {
+.client-link:hover,
+.client-link:focus {
   fill: var(--button-color);
 }
 
@@ -467,7 +475,7 @@ address {
   line-height: 1.1;
   letter-spacing: 0.02em;
 
-  color: var(--secondary-color);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .contacts-footer:hover,
