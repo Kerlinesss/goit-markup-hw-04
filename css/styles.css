@@ -9,6 +9,10 @@
   --white-background-color: #f5f4fa;
   --header-line-color: #ececec;
   --hero-background: #c4c4c4;
+  --anim-fast: 300ms ease-out;
+  --anim-slow: 800ms ease;
+
+  --modal-idx: 100;
 }
 
 body {
@@ -50,6 +54,7 @@ img {
   padding-top: 94px;
   padding-bottom: 94px;
 }
+
 
 /* Хедер */
 
@@ -112,12 +117,40 @@ header a {
   line-height: 1.1;
   letter-spacing: 0.02em;
   color: var(--first-color);
+  position: relative;
 }
 
 .header-link:hover,
 .header-link:focus {
   color: var(--button-color);
 }
+
+.header-link.current::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  margin-top: 28px;
+
+  transform: translateX(-50%) scaleX(1);
+
+  display: block;
+  width: 100%;
+  height: 4px;
+
+  border-radius: 2px;
+
+  background-color: var(--button-color);
+  opacity: 1;
+  /* transition: transform var(--anim-fast), opacity var(--anim-fast) ; */
+}
+
+.header-link.current:hover::after,
+.header-link.current:focus::after {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+  color: var(--button-color);
+}
+
 
 .contacts {
   display: flex;
@@ -144,6 +177,7 @@ header a {
 
 .current {
   color: var(--button-color);
+  opacity: 1;
 }
 
 .contacts-icon {
@@ -304,6 +338,10 @@ header a {
   column-gap: 30px;
 }
 
+/* .working-item {
+
+} */
+
 /* Наша команда */
 .team li {
   list-style: none;
@@ -341,6 +379,7 @@ header a {
 }
 .team-item {
   padding: 30px;
+  padding-bottom: 15px;
 }
 
 .social-list {
@@ -411,7 +450,7 @@ header a {
 .client-list-item:hover,
 .client-list-item:focus {
   cursor: pointer;
-  outline:1px solid var(--button-color) ;
+  outline: 1px solid var(--button-color);
   border-radius: 4px;
 }
 
@@ -529,6 +568,68 @@ address {
   background-color: var(--button-color);
 }
 
+
+/* Модальне Вікно */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--modal-idx);
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(1px);
+  transition: opacity 150ms linear, visibility 150ms linear;
+}
+
+.backdrop.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  width: 530px;
+  min-height: 580px;
+
+  background-color:var(--white-background-color);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 4px;
+
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.backdrop.is-hidden .modal {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-70%);
+}
+
+.modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
 /* Портфоліо */
 .filter li {
   list-style: none;
@@ -601,8 +702,11 @@ address {
   color: var(--secondary-color);
 }
 
-.gallery-list div {
+.gallery-discription {
   padding: 20px 24px;
+}
+
+.gallery-list div {
   border: 1px solid #eeeeee;
 }
 
@@ -617,3 +721,4 @@ address {
   flex-wrap: wrap;
   gap: 30px;
 }
+
